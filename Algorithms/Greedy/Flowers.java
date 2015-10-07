@@ -32,9 +32,11 @@ public class Flowers {
         int friendNum = 0;
         int total = 0;
         for(int price:flowerPriceList){
+			//itterate throught all the flower prices and calculate the total
             total +=(flowersBought+1)*price;
             friendNum++;
             if(friendNum == numFriends){
+				//if all friends bought flowers reset the friend counter and restart the cycle
                 friendNum = 0;
                 flowersBought++;
             }
