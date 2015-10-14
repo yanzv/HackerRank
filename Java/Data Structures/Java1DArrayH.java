@@ -28,71 +28,60 @@ For each case output "YES" if it's possible to win the game, output "NO" otherwi
 
 
 */
-import java.util.*;
 import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+import java.util.ArrayList;
 
-public class Java1DArrayH {
+public class Solution {
 
-	static boolean didWinGame(String[] gameArray,int jumpLength)
-	    {
-			int arrayPos = 0;
-	        boolean didWin = true;
-	        boolean isGoingBack = false;
-	        boolean isGoingForward = false;
-	        int posReached = -1;
-			while(arrayPos<gameArray.length)
-	        {
-	  
-	            if((arrayPos + jumpLength) >=gameArray.length || (arrayPos+1)>=gameArray.length){
-	                break;
-	            }
-				if(isGoingBack && (arrayPos+jumpLength)<=posReached){
-					return false;
-				}else if(gameArray[arrayPos+jumpLength].equals("0") && jumpLength!=0){
-	                	arrayPos +=jumpLength;
-						posReached = arrayPos;
-	               	 	isGoingBack=false;
-	                	isGoingForward = false;
-	            	}else if(gameArray[arrayPos+1].equals("0") && !isGoingBack){
-	                	arrayPos+=1;
-	                	posReached = arrayPos;
-	                	isGoingForward = true;				
-	            	}else{
-	                	if(isGoingForward){
-	                    	arrayPos-=1;
-	                    	isGoingForward=false;
-	                	}
-	                	if(arrayPos>1 && gameArray[arrayPos-1].equals("0")){
-	                    isGoingBack=true;
-	                    arrayPos-=1;
-						isGoingForward=false;
-					}else{
-	                    	didWin = false;
-	                    	break;
-	                	}
-	            	}
-	        }
-	        return didWin;
-	    }
-    
-	public static void main(String[] args) throws IOException
-	{
-		//Scanner sc = new Scanner(System.in);
-		Scanner sc = new Scanner(new FileReader("Java1DTestCase.txt"));
-		int numCases = sc.nextInt();
-		
-		for(int i=0;i<numCases;i++){
-		            int arraySize = sc.nextInt();
-		            int jumpLength = sc.nextInt();
-		            sc.nextLine();
-		            String[] gameArray = sc.nextLine().split(" ");
-					System.out.print("case:" +i+"jumpL:"+jumpLength+" arraySize:"+arraySize+"ans:");
-					if(didWinGame(gameArray,jumpLength)){
-							System.out.println("YES");
-		                }else{
-		                    System.out.println("NO");
-		            }
-		        }
-        sc.close();
+    static boolean didWinGame(String[] gameArray,int jumpLength, int currentPos,int lastJumpPos)
+    {
+	
+        boolean didWin = false;
+
+        int range = currentPos;
+
+        while(range < gameArray.length-1 && gameArray[range+1].equals("0")){
+            range++;
+        }
+        if(range == gameArray.length-1) return true;
+
+        int lowRange = range;
+        while(lowRange>lastJumpPos && gameArray[lowRange-1].equals("0") && (lowRange+jumpLength) > range+1 ){
+            lowRange--;
+        }
+        currentPos = lowRange;
+        for(int i = currentPos;i<=range;i++){
+            if((i+jumpLength)<gameArray.length && gameArray[i+jumpLength].equals("0")  && jumpLength!=0){
+                didWin = didWinGame(gameArray,jumpLength,i+jumpLength,i);
+            }	
+
+            if(didWin || (i+jumpLength)>=gameArray.length || (i+1)>=gameArray.length){
+                didWin = true;
+                break;
+            }
+        }
+
+        return didWin;
 	}
+    
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+        int numCases = sc.nextInt();
+        for(int i=0;i<numCases;i++){
+            int arraySize = sc.nextInt();
+            int jumpLength = sc.nextInt();
+            sc.nextLine();
+            String[] gameArray = sc.nextLine().split(" ");
+            if(didWinGame(gameArray,jumpLength,0,0)){
+                    System.out.println("YES");
+                }else{
+                    System.out.println("NO");
+            }
+        }
+    }
 }
