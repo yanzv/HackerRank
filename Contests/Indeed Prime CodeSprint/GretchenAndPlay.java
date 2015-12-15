@@ -72,11 +72,17 @@ public class GretchenAndPlay {
         sc.nextLine();
         
         String[] actorsAssigmentsArray = sc.nextLine().split(" ");
-        HashMap<Integer,Integer> scencesMap = new HashMap<Integer,Integer>();
-        TreeMap<Integer,Integer> cachedSearchMap = new TreeMap<Integer,Integer>();
+        HashMap<Integer,Integer> scencesMap = new HashMap<Integer,Integer>();  //stores number of actors for a specific scene
+        
+        //cachedSearchMap stores the amount of scenecs have certain amount of actors
+        //For example there are 2 scences with 3 actors, 5 scences with 1 actor
+        //They keys are in sorted ordered so they can be itterated to find out count the number of scenes having <P actors
+
+        TreeMap<Integer,Integer> cachedSearchMap = new TreeMap<Integer,Integer>(); 
         Integer numActorsInScene = 0;
         
         for(int i = 0;i<actorsAssigmentsArray.length;i++){
+            //load the scenes map and cachedsearch map
             int scenePos = Integer.parseInt(actorsAssigmentsArray[i]);
             numActorsInScene = scencesMap.remove(scenePos);
             if(numActorsInScene != null){
@@ -112,7 +118,7 @@ public class GretchenAndPlay {
                 int actorsCount = sc.nextInt();
 
                     int total = 0;
-                  
+                    //itterates through search tree to sum up the scences that have <P actors
                     for(Integer num : cachedSearchMap.keySet()){
                         if(num < actorsCount){
                             total+=cachedSearchMap.get(num);
@@ -137,6 +143,8 @@ public class GretchenAndPlay {
                         scencesMap.put(prevPos,prevNumActors-1);
                     }
 
+                //moving actors from one scene to another will require to update cachedSearchMap and add count to 
+                //actors new position and subctract one from previous
                Integer prvNumValue = cachedSearchMap.remove(prevNumActors);
                 if(prvNumValue != null && prvNumValue > 1){
                     cachedSearchMap.put(new Integer(prevNumActors),prvNumValue-1);
@@ -145,6 +153,7 @@ public class GretchenAndPlay {
               
                if((prevNumActors-1) > 0 ) {
                    Integer prvNumActorsOneVal = cachedSearchMap.get(prevNumActors-1);
+
                    if(prvNumActorsOneVal != null){
                        cachedSearchMap.put(new Integer(prevNumActors-1), prvNumActorsOneVal+1);
                    }else{
