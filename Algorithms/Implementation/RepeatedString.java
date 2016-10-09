@@ -1,3 +1,7 @@
+/* 
+Reapeated Strings
+https://www.hackerrank.com/challenges/repeated-string
+*/
 import java.io.*;
 import java.util.*;
 import java.text.*;
