@@ -1,9 +1,10 @@
 /*
- Minimum Distances
- https://www.hackerrank.com/challenges/minimum-distances/submissions/code/31473268
- 
-*/
 
+Equalize the Array
+ 
+https://www.hackerrank.com/challenges/equality-in-a-array
+
+ */
 import Foundation
 
 public func getLine() -> String {
@@ -31,20 +32,20 @@ let input: [Int] = readLine()
 
 var numDictionary = [Int : Int]()
 
-var minDistance = Int.max
+var maxNumOccurrences = 1
 
 var pos = 0
 
 for num in input {
     if let numPos = numDictionary[num] {
-        numDictionary[num] = pos - numPos
-        if numDictionary[num]! < minDistance {
-            minDistance = numDictionary[num]!
+        numDictionary[num]! += 1
+        if numDictionary[num]! > maxNumOccurrences {
+            maxNumOccurrences = numDictionary[num]!
         }
     } else {
-        numDictionary[num] = pos
+        numDictionary[num] = 1
     }
     pos+=1
 }
 
-print(minDistance == Int.max ? -1 : minDistance)
+print("\(input.count - maxNumOccurrences)")
