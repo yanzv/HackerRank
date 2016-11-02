@@ -1,8 +1,9 @@
 /*
- Minimum Distances
- https://www.hackerrank.com/challenges/minimum-distances/submissions/code/31473268
+ Flatland Space Stations
  
-*/
+ https://www.hackerrank.com/challenges/flatland-space-stations
+ 
+ */
 
 import Foundation
 
