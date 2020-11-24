@@ -36,15 +36,14 @@ A single line containing the national flower of the State received as input:
 Lily
 */
 
-import java.io.*;
-import java.util.*;
-import java.text.*;
-import java.math.*;
-import java.util.regex.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
+//Complete the classes below
 class Flower
 {
-    String whats_Your_Name()
+    String whatsYourName()
     {
         return "I have many names and types";    
     }
@@ -53,7 +52,7 @@ class Flower
 class Jasmine extends Flower
 {
     @Override
-    String whats_Your_Name()
+    String whatsYourName()
     {
         return "Jasmine";
     }
@@ -62,7 +61,7 @@ class Jasmine extends Flower
 class Lily extends Flower
 {
     @Override
-    String whats_Your_Name()
+    String whatsYourName()
     {
         return "Lily";
     }
@@ -71,42 +70,42 @@ class Lily extends Flower
 class Lotus extends Flower
 {
     @Override
-    String whats_Your_Name()
+    String whatsYourName()
     {
         return "Lotus";
     }
 }
 
-class State
+class Region
 {
-    Flower your_National_Flower()
+    Flower yourNationalFlower()
     {
         return new Flower();
     }
 }
 
-class WestBengal extends State
+class WestBengal extends Region
 {
     @Override
-    Flower your_National_Flower()
+    Flower yourNationalFlower()
     {
         return new Jasmine();
     }
 }
 
-class Karnataka extends State
+class Karnataka extends Region
 {
     @Override
-    Flower your_National_Flower()
+    Flower yourNationalFlower()
     {
         return new Lotus();
     }
 }
 
-class AndhraPradesh extends State
+class AndhraPradesh extends Region
 {
     @Override
-    Flower your_National_Flower()
+    Flower yourNationalFlower()
     {
         return new Lily();
     }
