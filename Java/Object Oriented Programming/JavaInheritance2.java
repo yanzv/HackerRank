@@ -32,11 +32,7 @@ My superclass is: Arithmetic
 
 //Write your code here
 class Arithmetic{
-   public String getName()
-   {
-       return "Arithmetic";
-       
-   }
+  
 }
 class Adder extends Arithmetic
 {
