@@ -42,7 +42,7 @@ public class PatternSyntaxChecker
       Scanner in = new Scanner(System.in);
       int testCases = Integer.parseInt(in.nextLine());
       while(testCases>0){
-         testCase--;
+         testCases--;
          String pattern = in.nextLine();
              //Write your code
          try{
