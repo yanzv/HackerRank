@@ -25,9 +25,22 @@ Just write the myRegex class, and we will append your code after the following p
 
 */
 
+import java.util.Scanner;
 
-class myRegex
-{
-    String pattern = "^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$";
-            
+class Solution {
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        while (in.hasNext()) {
+            String IP = in.next();
+            boolean isValid = IP.matches(new MyRegex().pattern);
+            System.out.println(isValid);
+        }
+    }
+}
+
+class MyRegex {
+    String num = "([01]?\\d{1,2}|2[0-4]\\d|25[0-5])";
+
+    // Construct the pattern using the defined numeric segment
+    String pattern = num + "." + num + "." + num + "." + num;
 }
