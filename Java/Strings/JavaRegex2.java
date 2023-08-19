@@ -42,31 +42,34 @@ Rana is the best player in eye game
 in inthe
 */
 
-
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class JavaRegex2
-{
-    public static void main(String[] args){
+public class DuplicateWords {
 
-        String pattern = "(?i)\\b(\\w+)(\\s+\\1)+\\b";
-        Pattern r = Pattern.compile(pattern,Pattern.CASE_INSENSITIVE);
+    public static void main(String[] args) {
+
+        String regex = "\\b(\\w+)(\\s\\1)+\\b";
+        Pattern p = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
 
         Scanner in = new Scanner(System.in);
-        int testCases = Integer.parseInt(in.nextLine());
-        while(testCases>0){
+        int numSentences = Integer.parseInt(in.nextLine());
+        
+        while (numSentences-- > 0) {
             String input = in.nextLine();
-            Matcher m = r.matcher(input);
-            boolean findMatch = true;
-            while(m.find( )){
-                input = input.replaceAll(pattern,"$1");
-                findMatch = false;
+            
+            Matcher m = p.matcher(input);
+            
+            // Check for subsequences of input that match the compiled pattern
+            while (m.find()) {
+                input = input.replaceAll(m.group(), m.group(1));
             }
+            
+            // Prints the modified sentence.
             System.out.println(input);
-            testCases--;
         }
+        
+        in.close();
     }
 }
-
